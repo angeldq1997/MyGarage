@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">My garage</string>
+    <string name="title">My garage</string>
+    <string name="h_user">User</string>
+    <string name="h_password">Password</string>
+    <string name="h_repeat_password">Repeat Password</string>
+    <string name="h_enter">Enter</string>
+    <string name="h_exit">Exit</string>
+    <string name="h_sign_in">Sign in</string>
+    <string name="forget_password">Did you forget your password?</string>
+    <string name="h_forgot_password">Forgot password?</string>
+
+    <string name="e_user">The user written is not valid</string>
+    <string name="e_user_empty">The user is empty</string>
+    <string name="e_password">The password written is not valid</string>
+    <string name="e_password_empty">The password is empty</string>
+    <string name="e_rep_password_empty">The confirm password is empty</string>
+    <string name="e_passwords_matching">The passwords do not match</string>
+    <string name="e_incorrect_user_password">User or password incorrect</string>
+    <string name="e_user_already_exists">User already on system</string>
+
+    <string name="e_sign_in">There was an error signing in</string>
+
+    <string name="f_email">Email</string>
+    <string name="e_email">The email written is not valid</string>
+    <string name="s_email_send">angeldq1997@gmail.com</string>
+    <string name="s_email_subject">Forgotten password</string>
+    <string name="s_email_body">Hello I forgot my login data, help me remember my password, my user is: </string>
+    <string name="s_email_cont">My email is: </string>
+
+    <string name="t_opening_welcome">Login correct, redirecting to home page</string>
+    <string name="t_correct_sign_in">Sign in correct, user created successfully</string>
+    <string name="t_canceled_sign_in">Sign in cancelled</string>
+    <string name="t_correct_login">Login successful</string>
+    <string name="t_canceled_login">Login cancelled</string>
+    <string name="t_fill_repeat_password">To sign in please fill out repeat password</string>
+    <string name="t_returning_home">Returning to login screen</string>
+
+    <string name="d_success_login">Session start</string>
+    <string name="d_confirm_login">Confirm login</string>
+    <string name="d_cancel_login">Cancel log in</string>
+
+    <string name="d_success_sign_in">Sign in successful</string>
+    <string name="d_confirm_sign_in">Confirm sign in</string>
+    <string name="d_cancel_sign_in">Cancel sign in</string>
+</resources>
