@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:title="@string/r_plate">
+    app:title="@string/rev_plate">
 
     <item
         android:id="@+id/app_bar_search"
         android:icon="@android:drawable/ic_menu_search"
-        android:title="@string/r_search"
+        android:title="@string/rev_search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/option_add"
         android:icon="@android:drawable/ic_input_add"
-        android:title="@string/r_add"
+        android:title="@string/rev_add"
         app:showAsAction="always" />
     <item
         android:id="@+id/option_remove"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/r_remove"
+        android:title="@string/rev_remove"
         app:showAsAction="always" />
 </menu>
