@@ -10,6 +10,7 @@
     <string name="forget_password">Did you forget your password?</string>
     <string name="h_forgot_password">Forgot password?</string>
 
+    <string name="e_send_email">Request password</string>
     <string name="e_user">The user written is not valid</string>
     <string name="e_user_empty">The user is empty</string>
     <string name="e_password">The password written is not valid</string>
@@ -36,11 +37,46 @@
     <string name="t_fill_repeat_password">To sign in please fill out repeat password</string>
     <string name="t_returning_home">Returning to login screen</string>
 
-    <string name="d_success_login">Session start</string>
-    <string name="d_confirm_login">Confirm login</string>
-    <string name="d_cancel_login">Cancel log in</string>
+    <string name="m_d_success_login">Session start</string>
+    <string name="m_d_confirm_login">Confirm login</string>
+    <string name="m_d_cancel_login">Cancel log in</string>
 
-    <string name="d_success_sign_in">Sign in successful</string>
-    <string name="d_confirm_sign_in">Confirm sign in</string>
-    <string name="d_cancel_sign_in">Cancel sign in</string>
+    <string name="m_d_success_sign_in">Sign in successful</string>
+    <string name="m_d_confirm_sign_in">Confirm sign in</string>
+    <string name="m_d_cancel_sign_in">Cancel sign in</string>
+
+    <string name="mv_title">My vehicles</string>
+    <string name="mv_add">Add</string>
+    <string name="mv_edit">Edit</string>
+    <string name="mv_remove">Remove</string>
+    <string name="mv_see_details">See details</string>
+    <string name="mv_e_not_selected">There isn\'t a vehicle selected</string>
+
+    <string name="rev_plate">1111-AAA</string>
+    <string name="rev_add">Add</string>
+    <string name="rev_search">Search</string>
+    <string name="rev_remove">Remove</string>
+
+    <string name="v_title">VEHICLE</string>
+    <string name="v_plate">Plate</string>
+    <string name="v_brand">Brand</string>
+    <string name="v_model">Model</string>
+    <string name="v_year">Year</string>
+    <string name="v_mileage">Mileage</string>
+    <string name="v_button_back">Back</string>
+    <string name="v_button_change">Change</string>
+    <string name="v_button_change_edit">Change vehicle data</string>
+    <string name="v_button_change_add">Add new vehicle</string>
+    <string name="v_e_missing_text">Error, you must fill all text</string>
+    <string name="v_e_cannot_obtain_vehicle">Error, the database couldn\'t load the vehicle</string>
+
+    <string name="rep_appointment_title">Appointment Data</string>
+    <string name="rep_appointment_plate">Plate</string>
+    <string name="rep_appointment_desc">Description</string>
+    <string name="rep_appointment_workshop">Mechanic workshop</string>
+    <string name="rep_by_myself">Myself</string>
+    <string name="rep_by_a_professional">Mechanic workshop / Inspection center</string>
+    <string name="rep_add">Add</string>
+    <string name="rep_remove">Remove</string>
+
 </resources>

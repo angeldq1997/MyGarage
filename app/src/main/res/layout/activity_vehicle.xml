@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vehicle_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="12dp"
+    tools:context=".VehicleActivity">
+
+    <TextView
+        android:id="@+id/tv_vtitle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
+        android:layout_weight="0.5"
+        android:text="@string/v_title"
+        android:textAlignment="center"
+        android:textColor="@color/purple_500"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_vplate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:ems="18"
+        android:hint="@string/v_plate"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <EditText
+        android:id="@+id/et_vbrand"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:ems="18"
+        android:hint="@string/v_brand"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <EditText
+        android:id="@+id/et_vmodel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:ems="18"
+        android:hint="@string/v_model"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <EditText
+        android:id="@+id/et_vyear"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:ems="18"
+        android:hint="@string/v_year"
+        android:inputType="number|numberSigned"
+        android:maxLength="4"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <EditText
+        android:id="@+id/et_vmileage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
+        android:layout_weight="1"
+        android:ems="18"
+        android:hint="@string/v_mileage"
+        android:inputType="number|numberSigned"
+        android:maxLength="6"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/b_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:backgroundTint="@color/red"
+            android:text="@string/v_button_back" />
+
+        <Button
+            android:id="@+id/b_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_blue"
+            android:text="@string/v_button_change" />
+    </LinearLayout>
+
+</LinearLayout>
