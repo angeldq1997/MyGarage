@@ -49,7 +49,7 @@
     <string name="mv_add">Add</string>
     <string name="mv_edit">Edit</string>
     <string name="mv_remove">Remove</string>
-    <string name="mv_see_details">See details</string>
+    <string name="mv_see_appointments">See appointments</string>
     <string name="mv_e_not_selected">There isn\'t a vehicle selected</string>
 
     <string name="rev_plate">1111-AAA</string>
@@ -69,8 +69,10 @@
     <string name="v_button_change_add">Add new vehicle</string>
     <string name="v_e_missing_text">Error, you must fill all text</string>
     <string name="v_e_cannot_obtain_vehicle">Error, the database couldn\'t load the vehicle</string>
+    <string name="v_e_cannot_insert_vehicle">Error, the database couldn\'t store the vehicle</string>
 
-    <string name="rep_appointment_title">Appointment Data</string>
+    <string name="rep_title">Appointment Data</string>
+    <string name="rep_appointment_title">Title of appointment</string>
     <string name="rep_appointment_plate">Plate</string>
     <string name="rep_appointment_desc">Description</string>
     <string name="rep_appointment_workshop">Mechanic workshop</string>

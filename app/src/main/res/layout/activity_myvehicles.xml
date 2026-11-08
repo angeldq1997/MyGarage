@@ -23,10 +23,12 @@
 
     <ListView
         android:id="@+id/lv_mvehicles"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
-        android:layout_weight="10">
+        android:layout_weight="10"
+        android:choiceMode="singleChoice"
+        android:listSelector="@color/blue_almost_transparent">
 
     </ListView>
 
@@ -72,6 +74,6 @@
             android:id="@+id/b_mvdetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mv_see_details" />
+            android:text="@string/mv_see_appointments" />
     </LinearLayout>
 </LinearLayout>

@@ -47,14 +47,15 @@ class UserDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
 
     //Return the user found on the database or null, if it couldn't find it
     fun findUser(username : String) : User? {
-        val cursor = readableDatabase.rawQuery("SELECT * FROM $USERS WHERE $COL_USERNAME == $username", null)
-        var user: User? = null
-        cursor.use {
-            user = User(
-                id = it.getInt(it.getColumnIndexOrThrow(COL_ID)),
-                username = it.getString(it.getColumnIndexOrThrow(COL_USERNAME)),
-                password = it.getString(it.getColumnIndexOrThrow(COL_PASSWORD))
-            )
+        var user : User? = null
+        readableDatabase.rawQuery("SELECT * FROM $USERS WHERE $COL_USERNAME = ?", arrayOf(username)).use{
+            if (it.moveToFirst()){
+                user = User(
+                    id = it.getInt(it.getColumnIndexOrThrow(COL_ID)),
+                    username = it.getString(it.getColumnIndexOrThrow(COL_USERNAME)),
+                    password = it.getString(it.getColumnIndexOrThrow(COL_PASSWORD))
+                )
+            }
         }
         return user
     }

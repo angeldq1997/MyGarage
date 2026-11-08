@@ -66,17 +66,17 @@ class VehicleDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, nul
             put(COL_MILEAGE, newVehicle.mileage)
             put(COL_USER_ID, newVehicle.userId)
         }
-        return writableDatabase.update(VEHICLES, values, "WHERE $COL_ID == ${oldVehicle.id}", null)
+        return writableDatabase.update(VEHICLES, values, COL_ID+"=?", arrayOf(oldVehicle.id.toString()))
     }
 
     //Will return the number of rows deleted (1 if the vehicle is deleted or 0 it cannot remove any)
-    fun remove(vehicle: Vehicle) : Int{
-        return writableDatabase.delete(VEHICLES, "WHERE $COL_ID == ${vehicle.id}", null)
+    fun remove(id: Long) : Int{
+        return writableDatabase.delete(VEHICLES, "$COL_ID =?", arrayOf(id.toString()))
     }
 
     //Return the vehicle found on the database or null, if it couldn't find it
     fun findVehicle(plate : String) : Vehicle? {
-        val cursor = readableDatabase.rawQuery("SELECT * FROM $VEHICLES WHERE $COL_PLATE == $plate", null)
+        val cursor = readableDatabase.rawQuery("SELECT * FROM $VEHICLES WHERE $COL_PLATE = ? ORDER BY $COL_ID", arrayOf(plate))
         var vehicle: Vehicle? = null
         cursor.use {
             vehicle = Vehicle(
@@ -94,7 +94,7 @@ class VehicleDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, nul
 
     //Return the vehicle found on the database or null, if it couldn't find it
     fun findVehicle(id : Int) : Vehicle? {
-        val cursor = readableDatabase.rawQuery("SELECT * FROM $VEHICLES WHERE $COL_ID == $id", null)
+        val cursor = readableDatabase.rawQuery("SELECT * FROM $VEHICLES WHERE $COL_ID = ? ORDER BY $COL_ID", arrayOf(id.toString()))
         var vehicle: Vehicle? = null
         cursor.use {
             vehicle = Vehicle(
@@ -112,7 +112,7 @@ class VehicleDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, nul
 
     fun listAll(userId : Int): List<Vehicle> {
         val list = mutableListOf<Vehicle>()
-        val cursor = readableDatabase.rawQuery("SELECT * FROM $VEHICLES WHERE $COL_USER_ID == $userId ORDER BY $COL_ID", null)
+        val cursor = readableDatabase.rawQuery("SELECT * FROM $VEHICLES WHERE $COL_USER_ID = ? ORDER BY $COL_ID", arrayOf(userId.toString()))
         cursor.use {
             while (it.moveToNext()) {
                 list.add(

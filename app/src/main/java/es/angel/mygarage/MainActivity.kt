@@ -1,6 +1,7 @@
 package es.angel.mygarage
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,10 +11,13 @@ import androidx.core.view.isGone
 import es.angel.mygarage.databinding.ActivityMainBinding
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import androidx.core.content.edit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     private lateinit var db: UserDbHelper
+    private lateinit var prefs: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -29,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initComponents() {
         db = UserDbHelper(this)
+        prefs = getSharedPreferences("userid", MODE_PRIVATE)
     }
 
     private fun initListeners() {
@@ -89,6 +94,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 .setPositiveButton(R.string.m_d_confirm_login) { dialog, which ->
                     Toast.makeText(this, getText(R.string.t_correct_login), Toast.LENGTH_LONG).show()
+                    prefs.edit { putInt("userId", user!!.id) }
                     startActivity(i)
                 }
             val dialog: AlertDialog = builder.create()
