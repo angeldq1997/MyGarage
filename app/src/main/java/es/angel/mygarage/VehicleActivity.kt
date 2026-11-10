@@ -2,20 +2,21 @@ package es.angel.mygarage
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import es.angel.mygarage.databinding.ActivityVehicleBinding
+import java.time.LocalDate
+import java.time.Year
 
 class VehicleActivity : AppCompatActivity() {
     private lateinit var binding : ActivityVehicleBinding
     private lateinit var vehicleDb: VehicleDbHelper
-    private var actualVehicle : Vehicle? = null
+    private lateinit var actualVehicle : Vehicle
     private lateinit var prefs: SharedPreferences
+    private var plate : String = ""
     private var userId : Int = -1
     companion object{
-        const val PARAMETER_TYPE = "parameter_type"
-        const val PARAMETER_ID = "parameter_id"
+        const val PARAMETER_PLATE = "parameter_plate"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,21 +32,21 @@ class VehicleActivity : AppCompatActivity() {
         prefs = getSharedPreferences("userid", MODE_PRIVATE)
         userId = prefs.getInt("userId", -1)
 
-        if (intent.getStringExtra(PARAMETER_TYPE) == "add"){
+        if ( intent.getStringExtra(PARAMETER_PLATE) == "NEW_VEHICLE" ){
+
             binding.bChange.setText(R.string.v_button_change_add)
 
         } else {
 
             binding.bChange.setText(R.string.v_button_change_edit)
-            val idVehicle = intent.getIntExtra(PARAMETER_ID, -1)
-            actualVehicle = vehicleDb.findVehicle(idVehicle)
-
-            if ( actualVehicle != null ){
-                binding.etVplate.setText(actualVehicle!!.plate)
-                binding.etVbrand.setText(actualVehicle!!.brand)
-                binding.etVmodel.setText(actualVehicle!!.model)
-                binding.etVyear.setText(actualVehicle!!.year)
-                binding.etVmileage.setText(actualVehicle!!.mileage)
+            plate = intent.getStringExtra(PARAMETER_PLATE)!!
+            if( vehicleDb.findVehicle(plate) != null ){
+                actualVehicle = vehicleDb.findVehicle(plate)!!
+                binding.etVplate.setText(actualVehicle.plate)
+                binding.etVbrand.setText(actualVehicle.brand)
+                binding.etVmodel.setText(actualVehicle.model)
+                binding.etVyear.setText(actualVehicle.year)
+                binding.etVmileage.setText(actualVehicle.mileage)
             }
         }
     }
@@ -65,36 +66,77 @@ class VehicleActivity : AppCompatActivity() {
     }
 
     private fun updateOrInsertVehicle() {
-        if (userId != -1){
-            val vehicle = Vehicle(
-                0,
-                binding.etVplate.text.toString(),
-                binding.etVbrand.text.toString(),
-                binding.etVmodel.text.toString(),
-                binding.etVyear.text.toString().toInt(),
-                binding.etVmileage.text.toString().toInt(),
-                userId
-            )
-
-            if (binding.bChange.text.toString() == getString(R.string.v_button_change_add)) {
-                if ( vehicleDb.insert(vehicle) == -1L ){
-                    Toast.makeText(this, R.string.v_e_cannot_insert_vehicle, Toast.LENGTH_LONG).show()
-                } else{
-                    finish()
-                }
-
+        if (userId != -1) {
+            if (!validVehicle( binding.etVplate.text.toString(), binding.etVyear.text.toString(), binding.etVmileage.text.toString() )) {
+                Toast.makeText(this, R.string.v_e_cannot_insert_vehicle, Toast.LENGTH_LONG).show()
             } else {
-                if (actualVehicle == null) {
-                    Toast.makeText(this, R.string.v_e_cannot_obtain_vehicle, Toast.LENGTH_LONG).show()
+                val vehicle = Vehicle(
+                    0,
+                    binding.etVplate.text.toString(),
+                    binding.etVbrand.text.toString(),
+                    binding.etVmodel.text.toString(),
+                    binding.etVyear.text.toString().toInt(),
+                    binding.etVmileage.text.toString().toInt(),
+                    userId
+                )
+
+                if (intent.getStringExtra(PARAMETER_PLATE) == "NEW_VEHICLE") {
+                    insertVehicle(vehicle)
                 } else {
-                    vehicleDb.update(actualVehicle!!, vehicle)
+                    updateVehicle(vehicle)
                 }
             }
-        }
 
+        } else {
+            Toast.makeText(this, "ERROR WITH USER ID", Toast.LENGTH_LONG).show()
+        }
     }
 
-    fun allTextFilled(): Boolean {
+    private fun updateVehicle(vehicle: Vehicle) {
+        if (vehicleDb.update(actualVehicle, vehicle) == 0) {
+            Toast.makeText(this, R.string.v_e_cannot_obtain_vehicle, Toast.LENGTH_LONG).show()
+        } else {
+            finish()
+        }
+    }
+
+    private fun insertVehicle(vehicle: Vehicle) {
+        if (vehicleDb.insert(vehicle) == -1L) {
+            Toast.makeText(this, R.string.v_e_cannot_insert_vehicle, Toast.LENGTH_LONG).show()
+        } else {
+            finish()
+        }
+    }
+
+    private fun validVehicle(plate : String, year : String, mileage : String) : Boolean {
+        if (!validPlate(plate)){
+            Toast.makeText(this, R.string.v_e_invalid_plate, Toast.LENGTH_LONG).show()
+            return false
+        }
+        if (!validYear(year)){
+            Toast.makeText(this, R.string.v_e_invalid_year, Toast.LENGTH_LONG).show()
+            return false
+        }
+        if (!validMileage(mileage)){
+            Toast.makeText(this, R.string.v_e_invalid_mileage, Toast.LENGTH_LONG).show()
+            return false
+        }
+        return true
+    }
+
+    private fun validPlate (plate: String): Boolean {
+        return plate.matches("\\d{4}-\\w{3}".toRegex())
+    }
+
+    private fun validYear (year: String): Boolean {
+        return year.toInt() > 1950 && year.toInt() <= Year.now().toString().toInt()
+    }
+
+    private fun validMileage (mileage: String): Boolean {
+        return mileage.toInt() in 1..999999
+    }
+
+    private fun allTextFilled(): Boolean {
         return binding.etVplate.text.isNotEmpty() && binding.etVbrand.text.isNotEmpty() && binding.etVmodel.text.isNotEmpty()
                 && binding.etVyear.text.isNotEmpty() && binding.etVmileage.text.isNotEmpty()
     }

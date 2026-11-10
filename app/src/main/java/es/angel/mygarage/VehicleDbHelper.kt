@@ -70,8 +70,8 @@ class VehicleDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, nul
     }
 
     //Will return the number of rows deleted (1 if the vehicle is deleted or 0 it cannot remove any)
-    fun remove(id: Long) : Int{
-        return writableDatabase.delete(VEHICLES, "$COL_ID =?", arrayOf(id.toString()))
+    fun remove(plate: String) : Int{
+        return writableDatabase.delete(VEHICLES, "$COL_PLATE =?", arrayOf(plate))
     }
 
     //Return the vehicle found on the database or null, if it couldn't find it

@@ -69,6 +69,7 @@
     <string name="v_button_change_add">Add new vehicle</string>
     <string name="v_e_missing_text">Error, you must fill all text</string>
     <string name="v_e_cannot_obtain_vehicle">Error, the database couldn\'t load the vehicle</string>
+    <string name="v_e_cannot_update_vehicle">Error, the vehicle couldn\'t be updated</string>
     <string name="v_e_cannot_insert_vehicle">Error, the database couldn\'t store the vehicle</string>
 
     <string name="rep_title">Appointment Data</string>
@@ -80,5 +81,14 @@
     <string name="rep_by_a_professional">Mechanic workshop / Inspection center</string>
     <string name="rep_add">Add</string>
     <string name="rep_remove">Remove</string>
+
+    <string name="v_e_invalid_plate">Error, the plate entered is not valid</string>
+    <string name="v_e_t_invalid_plate">Error, the plate entered is not valid, it has to contain four digits a dash and three letters</string>
+    <string name="v_e_invalid_year">Error, the year entered is not valid</string>
+    <string name="v_e_t_invalid_year">Error, the year entered is not valid, it has to be between 1950 and the current year</string>
+    <string name="v_e_invalid_mileage">Error, the mileage entered is not valid</string>
+    <string name="v_e_t_invalid_mileage">Error, the mileage entered is not valid, it has to be between 0 and 999.999</string>
+
+    <string name="v_e_invalid_vehicle">Error, the data for the vehicle is not valid</string>
 
 </resources>
