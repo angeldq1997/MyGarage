@@ -21,5 +21,7 @@
     <ListView
         android:id="@+id/lv_repairs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:listSelector="@color/blue_almost_transparent" />
 </LinearLayout>

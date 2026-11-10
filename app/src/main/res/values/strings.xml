@@ -90,5 +90,7 @@
     <string name="v_e_t_invalid_mileage">Error, the mileage entered is not valid, it has to be between 0 and 999.999</string>
 
     <string name="v_e_invalid_vehicle">Error, the data for the vehicle is not valid</string>
+    <string name="rep_date">Date (DD/MM/YYYY)</string>
+    <string name="e_rev_inserting">Error inserting appointment</string>
 
 </resources>

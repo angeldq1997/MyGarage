@@ -1,7 +1,5 @@
 package es.angel.mygarage
 
-
-
 data class Revision(
     val id: Int = 0,
     val plate: String,

@@ -66,7 +66,7 @@ class VehicleDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, nul
             put(COL_MILEAGE, newVehicle.mileage)
             put(COL_USER_ID, newVehicle.userId)
         }
-        return writableDatabase.update(VEHICLES, values, COL_ID+"=?", arrayOf(oldVehicle.id.toString()))
+        return writableDatabase.update(VEHICLES, values, "$COL_ID =?", arrayOf(oldVehicle.id.toString()))
     }
 
     //Will return the number of rows deleted (1 if the vehicle is deleted or 0 it cannot remove any)

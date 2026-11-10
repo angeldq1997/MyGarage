@@ -56,7 +56,7 @@ class RevisionDbHelper (context: Context) : SQLiteOpenHelper(context, DB_NAME, n
             put(COL_WORKSHOP, newRevision.workshop)
             put(COL_DATE, newRevision.date)
         }
-        return writableDatabase.update(REVISIONS, values, VehicleDbHelper.COL_ID +"=?", arrayOf(oldRevisionId.toString()))
+        return writableDatabase.update(REVISIONS, values, "$COL_ID =?", arrayOf(oldRevisionId.toString()))
     }
 
     //Will return the new id of the revision or -1 if it fails
@@ -96,18 +96,20 @@ class RevisionDbHelper (context: Context) : SQLiteOpenHelper(context, DB_NAME, n
     fun listRevision(plate : String) : List<Revision> {
         val list = mutableListOf<Revision>()
         val cursor = readableDatabase.rawQuery("SELECT * FROM $REVISIONS WHERE $COL_PLATE = ? ORDER BY $COL_ID", arrayOf(plate))
-        cursor.use {
-            while (it.moveToNext()) {
-                list.add(
-                    Revision(
-                        id = it.getInt(it.getColumnIndexOrThrow(COL_ID)),
-                        plate = it.getString(it.getColumnIndexOrThrow(COL_PLATE)),
-                        description = it.getString(it.getColumnIndexOrThrow(COL_DESCRIPTION)),
-                        title = it.getString(it.getColumnIndexOrThrow(COL_TITLE)),
-                        workshop = it.getString(it.getColumnIndexOrThrow(COL_WORKSHOP)),
-                        date = it.getString(it.getColumnIndexOrThrow(COL_DATE))
+        if (cursor.count != 0){
+            cursor.use {
+                while (it.moveToNext()) {
+                    list.add(
+                        Revision(
+                            id = it.getInt(it.getColumnIndexOrThrow(COL_ID)),
+                            plate = it.getString(it.getColumnIndexOrThrow(COL_PLATE)),
+                            description = it.getString(it.getColumnIndexOrThrow(COL_DESCRIPTION)),
+                            title = it.getString(it.getColumnIndexOrThrow(COL_TITLE)),
+                            workshop = it.getString(it.getColumnIndexOrThrow(COL_WORKSHOP)),
+                            date = it.getString(it.getColumnIndexOrThrow(COL_DATE))
+                        )
                     )
-                )
+                }
             }
         }
         return list
