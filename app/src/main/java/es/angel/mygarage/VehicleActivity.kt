@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import es.angel.mygarage.databinding.ActivityVehicleBinding
-import java.time.LocalDate
 import java.time.Year
 
 class VehicleActivity : AppCompatActivity() {
+    private lateinit var actualVehicle: Vehicle
     private lateinit var binding : ActivityVehicleBinding
     private lateinit var vehicleDb: VehicleDbHelper
-    private lateinit var actualVehicle : Vehicle
     private lateinit var prefs: SharedPreferences
     private var plate : String = ""
     private var userId : Int = -1
@@ -36,17 +35,17 @@ class VehicleActivity : AppCompatActivity() {
 
             binding.bChange.setText(R.string.v_button_change_add)
 
-        } else {
+        } else if (intent.getStringExtra(PARAMETER_PLATE) != null && intent.getStringExtra(PARAMETER_PLATE)!!.isNotEmpty() ) {
 
-            binding.bChange.setText(R.string.v_button_change_edit)
-            plate = intent.getStringExtra(PARAMETER_PLATE)!!
+            binding.bChange.setText(R.string.v_button_change)
+            plate = intent.getStringExtra(PARAMETER_PLATE).toString()
             if( vehicleDb.findVehicle(plate) != null ){
                 actualVehicle = vehicleDb.findVehicle(plate)!!
                 binding.etVplate.setText(actualVehicle.plate)
                 binding.etVbrand.setText(actualVehicle.brand)
                 binding.etVmodel.setText(actualVehicle.model)
-                binding.etVyear.setText(actualVehicle.year)
-                binding.etVmileage.setText(actualVehicle.mileage)
+                binding.etVyear.setText(actualVehicle.year.toString())
+                binding.etVmileage.setText(actualVehicle.mileage.toString())
             }
         }
     }

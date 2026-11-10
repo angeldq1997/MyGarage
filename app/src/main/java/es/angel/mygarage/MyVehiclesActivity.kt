@@ -63,7 +63,7 @@ class MyVehiclesActivity : AppCompatActivity() {
 
         binding.bMvedit.setOnClickListener {
             val i = Intent(this, VehicleActivity::class.java)
-            if (plate.isEmpty() || vehicleDb.findVehicle(plate) == null) {
+            if ( plate.isEmpty() ) {
                 Toast.makeText(this, R.string.mv_e_not_selected, Toast.LENGTH_LONG).show()
             } else {
                 i.putExtra(VehicleActivity.PARAMETER_PLATE, plate)
@@ -75,18 +75,17 @@ class MyVehiclesActivity : AppCompatActivity() {
             if ( plate.isEmpty() || vehicleDb.remove(plate) == 0){
                 Toast.makeText(this, "ERROR ERASING", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Erased correctly, vehicle with plate: $plate D:", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Erased correctly, vehicle with plate: $plate", Toast.LENGTH_LONG).show()
                 showVehicles()
             }
         }
 
         binding.bMvdetails.setOnClickListener {
             val i = Intent(this, RevisionsActivity::class.java)
-            if (binding.lvMvehicles.selectedItemId == AdapterView.INVALID_ROW_ID) {
+            if (plate.isEmpty()) {
                 Toast.makeText(this, R.string.mv_e_not_selected, Toast.LENGTH_LONG).show()
             } else {
-                //TODO: Modify putExtra for successfully getting plate with binding.lvMvehicles.selectedItem.plate
-                i.putExtra(RevisionsActivity.PARAMETER_PLATE, "3577-CVN")
+                i.putExtra(RevisionsActivity.PARAMETER_PLATE, plate)
                 startActivity(i)
             }
         }

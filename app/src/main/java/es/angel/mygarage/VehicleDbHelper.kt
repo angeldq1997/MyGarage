@@ -76,18 +76,23 @@ class VehicleDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, nul
 
     //Return the vehicle found on the database or null, if it couldn't find it
     fun findVehicle(plate : String) : Vehicle? {
-        val cursor = readableDatabase.rawQuery("SELECT * FROM $VEHICLES WHERE $COL_PLATE = ? ORDER BY $COL_ID", arrayOf(plate))
+        val cursor = readableDatabase.rawQuery("SELECT * FROM $VEHICLES WHERE $COL_PLATE = ?", arrayOf(plate))
         var vehicle: Vehicle? = null
-        cursor.use {
-            vehicle = Vehicle(
-                id = it.getInt(it.getColumnIndexOrThrow(COL_ID)),
-                plate = it.getString(it.getColumnIndexOrThrow(COL_PLATE)),
-                brand = it.getString(it.getColumnIndexOrThrow(COL_BRAND)),
-                model = it.getString(it.getColumnIndexOrThrow(COL_MODEL)),
-                year = it.getInt(it.getColumnIndexOrThrow(COL_YEAR)),
-                mileage = it.getInt(it.getColumnIndexOrThrow(COL_MILEAGE)),
-                userId = it.getInt(it.getColumnIndexOrThrow(COL_USER_ID))
-            )
+        if (cursor.count == 0){
+            return null
+        } else{
+            cursor.moveToFirst()
+            cursor.use {
+                vehicle = Vehicle(
+                    id = it.getInt(it.getColumnIndexOrThrow(COL_ID)),
+                    plate = it.getString(it.getColumnIndexOrThrow(COL_PLATE)),
+                    brand = it.getString(it.getColumnIndexOrThrow(COL_BRAND)),
+                    model = it.getString(it.getColumnIndexOrThrow(COL_MODEL)),
+                    year = it.getInt(it.getColumnIndexOrThrow(COL_YEAR)),
+                    mileage = it.getInt(it.getColumnIndexOrThrow(COL_MILEAGE)),
+                    userId = it.getInt(it.getColumnIndexOrThrow(COL_USER_ID))
+                )
+            }
         }
         return vehicle
     }
